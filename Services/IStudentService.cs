@@ -3,10 +3,10 @@ namespace StudentManagementAPI.Services
 {
     public interface IStudentService
     {
-        Task<IEnumerable<Student>> GetAllAsync();
-        Task<Student> GetAsync(string id);
-        Task<Student> CreateAsync(Student student);
-        Task UpdateAsync(string id, Student student);
-        Task DeleteAsync(string id);
+        Task<IEnumerable<Student>> GetAllStudentsAsync();
+        Task<Student?> GetStudentAsync(string id);
+        Task<Student> CreateStudentAsync(Student student);
+        Task UpdateStudentAsync(string id, Student student);
+        Task DeleteStudentAsync(string id);
     }
 }

@@ -12,28 +12,28 @@ namespace StudentManagementAPI.Services
             _students = database.GetCollection<Student>(settings.StudentCoursesCollectionName);
         }
 
-        public async Task<Student> CreateAsync(Student student)
+        public async Task<Student> CreateStudentAsync(Student student)
         {
             await _students.InsertOneAsync(student);
             return student; 
         }
 
-        public async Task<IEnumerable<Student>> GetAllAsync()
+        public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
             return await _students.Find(student => true).ToListAsync();
         }
 
-        public async Task<Student> GetAsync(string id)
+        public async Task<Student?> GetStudentAsync(string id)
         {
             return await _students.Find(student => student.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteStudentAsync(string id)
         {
             await _students.DeleteOneAsync(student => student.Id == id);
         }
 
-        public async Task UpdateAsync(string id, Student student)
+        public async Task UpdateStudentAsync(string id, Student student)
         {
             await _students.ReplaceOneAsync(student => student.Id == id, student);
         }

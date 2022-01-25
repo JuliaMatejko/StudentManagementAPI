@@ -15,18 +15,18 @@ namespace StudentManagement.Controllers
             this.studentService = studentService;
         }
 
-        // GET: api/<StudentsController>
+        // GET: api/Students
         [HttpGet]
-        public async Task<IEnumerable<Student>> GetAllStudents()
+        public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
-            return await studentService.GetAllAsync();
+            return await studentService.GetAllStudentsAsync();
         }
 
-        // GET api/<StudentsController>/5
+        // GET api/Students/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Student>> GetStudent(string id)
+        public async Task<ActionResult<Student>> GetStudentAsync(string id)
         {
-            var student = await studentService.GetAsync(id);
+            var student = await studentService.GetStudentAsync(id);
 
             if (student == null)
             {
@@ -36,43 +36,43 @@ namespace StudentManagement.Controllers
             return student;
         }
 
-        // POST api/<StudentsController>
+        // POST api/Students
         [HttpPost]
-        public async Task<ActionResult<Student>> CreateStudent([FromBody] Student student)
+        public async Task<ActionResult<Student>> CreateStudentAsync([FromBody] Student student)
         {
-            await studentService.CreateAsync(student);
+            await studentService.CreateStudentAsync(student);
 
-            return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
+            return CreatedAtAction(nameof(GetStudentAsync), new { id = student.Id }, student);
         }
 
-        // PUT api/<StudentsController>/5
+        // PUT api/Students/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Student>> UpdateStudent(string id, [FromBody] Student student)
+        public async Task<ActionResult<Student>> UpdateStudentAsync(string id, [FromBody] Student student)
         {
-            var existingStudent = await studentService.GetAsync(id);
+            var existingStudent = await studentService.GetStudentAsync(id);
 
             if (existingStudent == null)
             {
                 return NotFound($"Student with Id = {id} not found");
             }
 
-            await studentService.UpdateAsync(id, student);
+            await studentService.UpdateStudentAsync(id, student);
 
             return NoContent();
         }
 
-        // DELETE api/<StudentsController>/5
+        // DELETE api/Students/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Student>> DeleteStudent(string id)
+        public async Task<ActionResult<Student>> DeleteStudentAsync(string id)
         {
-            var student = await studentService.GetAsync(id);
+            var student = await studentService.GetStudentAsync(id);
 
             if (student == null)
             {
                 return NotFound($"Student with Id = {id} not found");
             }
 
-            await studentService.DeleteAsync(student.Id);
+            await studentService.DeleteStudentAsync(student.Id);
 
             return Ok($"Student with Id = {id} deleted");
         }
